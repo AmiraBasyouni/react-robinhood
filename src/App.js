@@ -1,13 +1,12 @@
 import Logo from './Logo.svg';
 import './App.css';
-import Header from './Header'
-import Newsfeed from './Newsfeed'
-import Stats from './Stats'
+import Header from './Header';
+import Newsfeed from './Newsfeed';
+import Stats from './Stats';
 
 function App() {
   return (
     <div className="App">
-      
       {/* Header */}
       <div className="app__header">
         <Header />
