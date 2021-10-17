@@ -1,11 +1,28 @@
-import React from 'react';
-import './style.css';
+import Logo from './Logo.svg';
+import './App.css';
+import Header from './Header'
+import Newsfeed from './Newsfeed'
+import Stats from './Stats'
 
-export default function App() {
+function App() {
   return (
-    <div>
-      <h1>Welcome to StackBlitz</h1>
-      <p>Let's get this thing started!</p>
+    <div className="App">
+      
+      {/* Header */}
+      <div className="app__header">
+        <Header />
+      </div>
+      <div className="app__body">
+        <div className="app__container">
+          <Newsfeed />
+          {/*stats*/}
+          <Stats />
+        </div>
+      </div>
+
+      {/* Body */}
     </div>
   );
 }
+
+export default App;
