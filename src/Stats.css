@@ -1,5 +1,15 @@
 .stats {
-  background-color: red;
   flex: 0.3;
-  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 0px 30px 30px 30px;
+  color: white;
+}
+
+.stats__container {
+  flex-direction: column;
+  flex: 1;
+  background-color: #1e2023;
+  border-radius: 5px;
+  border: 1px solid #42494d;
 }
