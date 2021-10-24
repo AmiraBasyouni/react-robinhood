@@ -1,36 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { Line } from 'react-chartjs-2';
-import './LineGraph.css'
+import './LineGraph.css';
 
 function LineGraph() {
   const [graphData, setGraphData] = useState([]);
-  // const data = [
-  //   { x: 10, y: 20 },
-  //   { x: 15, y: 10 },
-  //   { x: 12, y: 4 },
-  //   { x: 5, y: 5 },
-  // ];
-  const oLinegraphData = {
-    labels: [10, 15, 12],
-    datasets: [
-      {
-        data: graphData,
-        backgroundColor: 'black',
-        borderColor: '#5AC53B',
-        borderWidth: 2,
-        pointBorderColor: 'rgba(0, 0, 0, 0)',
-        pointBackgroundColor: 'rgba(0, 0, 0, 0)',
-        pointHoverBackgroundColor: '#5AC53B',
-        pointHoverBorderColor: '#000000',
-        pointHoverBorderWidth: 4,
-        pointHoverRadius: 6,
-        data: [20, 10, 4],
-        label: 'First dataset',
-        fill: true,
-        type: 'line',
-      },
-    ],
-  };
+  const data = [
+    { x: 10, y: 20 },
+    { x: 15, y: 10 },
+    { x: 12, y: 4 },
+  ];
 
   const createMockData = () => {
     let data = [];
@@ -44,45 +22,18 @@ function LineGraph() {
     }
     setGraphData(data);
   };
+
   useEffect(() => {
     createMockData();
   }, []);
   return (
     <div className="linegraph">
       <Line
-        data={oLinegraphData}
-        options={{
-          maintainAspectRatio: false,
-          legend: {
-            display: false,
-          },
-          tooltips: {
-            mode: 'index',
-            intersect: false,
-          },
-          scales: {
-            xAxes: [
-              {
-                type: 'time',
-                time: {
-                  format: 'MM/DD/YY',
-                  tooltipFormat: 'll',
-                },
-                ticks: {
-                  display: false,
-                },
-              },
-            ],
-            yAxes: [{}],
-          },
-        }}
-      />
-      {/* <Line
         data={{
           datasets: [
             {
               type: 'line',
-              data: data,
+              data: graphData,
               backgroundColor: 'black',
               borderColor: '#5AC53B',
               borderWidth: 2,
@@ -95,8 +46,30 @@ function LineGraph() {
             },
           ],
         }}
-        
-      /> */}
+        options={{
+          legend: {
+            display: false,
+          },
+          tooltips: {
+            mode: 'index',
+            intersect: false,
+          },
+          scales: {
+            yAxis: [
+              {
+                type: 'time',
+                time: {
+                  format: 'MM/DD/YY',
+                  tooltipFormat: 'll',
+                },
+                ticks: {
+                  display: false,
+                },
+              },
+            ],
+          },
+        }}
+      />
     </div>
   );
 }
