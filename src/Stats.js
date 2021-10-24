@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './Stats.css';
 import axios from 'axios';
+import StatsRow from './StatsRow';
 
 const TOKEN = 'bvkgi0v48v6vtohioj2g';
 const BASE_URL = 'https://finnhub.io/api/v1/quote';
@@ -42,8 +43,8 @@ function Stats() {
     });
 
     Promise.all(promises).then(() => {
-      console.log(testData);
-      setStocksData(testData);
+      setstockData(tempStocksData);
+      // console.log(tempStocksData);
     });
   }, []);
 
@@ -60,7 +61,17 @@ function Stats() {
           <p>Lists</p>
         </div>
         <div className="stats__content">
-          <div className="stats__rows">{/*stocks we can buy*/}</div>
+          <div className="stats__rows">
+            {/*stocks we can buy*/}
+            {stockData.map((stock) => (
+              <StatsRow
+              // key={stock.name}
+              // name={stock.name}
+              // openPrice={stock.o}
+              // price={stock.c}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </div>
