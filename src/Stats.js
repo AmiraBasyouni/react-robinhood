@@ -65,10 +65,10 @@ function Stats() {
             {/*stocks we can buy*/}
             {stockData.map((stock) => (
               <StatsRow
-              // key={stock.name}
-              // name={stock.name}
-              // openPrice={stock.o}
-              // price={stock.c}
+              key={stock.name}
+              name={stock.name}
+              openPrice={stock.o}
+              price={stock.c}
               />
             ))}
           </div>
