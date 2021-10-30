@@ -24,6 +24,10 @@
   font-weight: 500px;
 }
 
+.row__chart{
+  padding:0 10px;
+}
+
 .row__price {
   padding-bottom: 4px;
 }
@@ -32,6 +36,7 @@
   color: #5ac53b;
 }
 
-.row:hover {
+/* .row:hover {
   background-color: #31363a;
-}
+} */
+
