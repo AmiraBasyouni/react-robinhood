@@ -9,8 +9,29 @@ const BASE_URL = 'https://finnhub.io/api/v1/quote';
 
 function Stats() {
   const [stockData, setstockData] = useState([]);
-
   const [ myStocks, setmyStocks] = useState([])
+
+  const getMyStocks = () => {
+    db
+    .collection('myStocks')
+    .onSnapshot(snapshot => {
+      // console.log(snapshot);
+      let promises = [];
+      let tempData = [];
+      snapshot.docs.map((doc) => {
+          // console.log(doc.data())
+        promise.push(getStocksData(doc.data().ticker))
+        .then(res => {
+          tempData.push({
+            id: doc.id,
+            data: doc.data(),
+            info: res.data
+          })
+        }
+    )})
+    // })
+    })
+  };
 
   const getStocksData = (stock) => {
     return axios
@@ -33,6 +54,7 @@ function Stats() {
       'SBUX',
     ];
     let promises = [];
+    getMyStocks();
     stocksList.map((stock) => {
       promises.push(
         getStocksData(stock).then((res) => {
@@ -46,9 +68,11 @@ function Stats() {
     });
 
     Promise.all(promises).then(() => {
-      setstockData(tempStocksData);
-      // console.log(tempStocksData);
-    });
+        console.log(tempData);
+      // setstockData(tempData);
+    })
+    // ;
+
   }, []);
 
   return (
