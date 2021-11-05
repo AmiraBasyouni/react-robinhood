@@ -3,34 +3,30 @@ import './Stats.css';
 import axios from 'axios';
 import StatsRow from './StatsRow';
 import {db} from './firebase';
+import { collection, getDocs } from 'firebase/firestore/lite';
 
-const TOKEN = 'bvkgi0v48v6vtohioj2g';
-const BASE_URL = 'https://finnhub.io/api/v1/quote';
+// const TOKEN = 'bvkgi0v48v6vtohioj2g';
+// const BASE_URL = 'https://finnhub.io/api/v1/quote';
 
 function Stats() {
+  const TOKEN = 'bvkgi0v48v6vtohioj2g';
+  const BASE_URL = 'https://finnhub.io/api/v1/quote';
   const [stockData, setstockData] = useState([]);
-  const [ myStocks, setmyStocks] = useState([])
-
+  const [myStocks, setmyStocks] = useState([]);
   const getMyStocks = () => {
-    db
-    .collection('myStocks')
-    .onSnapshot(snapshot => {
-      // console.log(snapshot);
+    const myStocksCollection = collection(db, 'cities');
+    getDocs(myStocksCollection).then((snapshot) => {
       let promises = [];
       let tempData = [];
       snapshot.docs.map((doc) => {
-          // console.log(doc.data())
-        promise.push(getStocksData(doc.data().ticker))
-        .then(res => {
-          tempData.push({
-            id: doc.id,
-            data: doc.data(),
-            info: res.data
+        console.log(snapshot.docs);
+        promises.push(
+          getStocksData(doc.data().ticker).then((res) => {
+            tempData.push({ id: doc.id, data: doc.data(), info: res.data });
           })
-        }
-    )})
-    // })
-    })
+        );
+      });
+    });
   };
 
   const getStocksData = (stock) => {
