@@ -14,7 +14,7 @@ function Stats() {
   const [stockData, setstockData] = useState([]);
   const [myStocks, setmyStocks] = useState([]);
   const getMyStocks = () => {
-    const myStocksCollection = collection(db, 'cities');
+    const myStocksCollection = collection(db, 'myStocks');
     getDocs(myStocksCollection).then((snapshot) => {
       let promises = [];
       let tempData = [];
@@ -28,6 +28,29 @@ function Stats() {
       });
     });
   };
+
+  
+  // function Stats() {
+  //   const [ myStocks, setmyStocks] = useState([])
+  //    db
+  //   .collection('myStocks')
+  //   .onSnapshot(snapshot => {
+  //     // console.log(snapshot);
+  //       // console.log(doc.data())
+  //       promise.push(getStocksData(doc.data().ticker))
+  //       .then(res => {
+  //         tempData.push({
+  //           id: doc.id,
+  //           data: doc.data(),
+  //           info: res.data
+  //       console.log(snapshot.docs);
+  //          }
+  //   )})
+  //   // })
+  //   })
+  // };
+   
+
 
   const getStocksData = (stock) => {
     return axios
@@ -65,7 +88,8 @@ function Stats() {
 
     Promise.all(promises).then(() => {
         console.log(tempData);
-      // setstockData(tempData);
+        setMyStocks(tempData);
+        // setstockData(tempData);
     })
     // ;
 
